@@ -14,7 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 const authRoutes = require('./routes/auth');
+const cartRoutes = require('./routes/cart');
+
 app.use('/api/auth', authRoutes);
+app.use('/api/cart', cartRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Nep-Shop API Server is running!' });
