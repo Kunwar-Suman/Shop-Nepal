@@ -1,0 +1,155 @@
+.order-detail-container {
+  width: 100%;
+}
+
+.order-detail-container h1 {
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.order-detail-card {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #eee;
+}
+
+.order-header-section h2 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+}
+
+.order-date {
+  color: #666;
+  margin: 0;
+}
+
+.order-status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.order-items-section {
+  margin-bottom: 30px;
+}
+
+.order-items-section h3 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.item-info {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.item-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.item-info h4 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+}
+
+.item-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.item-price {
+  font-weight: bold;
+  color: #61dafb;
+  font-size: 1.1rem;
+}
+
+.order-summary-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary-row.total {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #61dafb;
+}
+
+.delivery-info-section h3 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.delivery-info-section p {
+  margin: 10px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.delivery-info-section strong {
+  color: #2c3e50;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .order-header-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .order-item-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
