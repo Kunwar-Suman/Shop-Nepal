@@ -3,29 +3,39 @@
 }
 
 .cart-container h1 {
-  margin-bottom: 30px;
-  color: #2c3e50;
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .cart-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 30px;
+  gap: var(--spacing-xl);
 }
 
 .cart-items {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-lg);
 }
 
 .cart-item {
   display: flex;
-  gap: 20px;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: var(--spacing-lg);
+  background: var(--bg-primary);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-base);
+}
+
+.cart-item:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
 }
 
 .item-image {
@@ -121,18 +131,21 @@
 }
 
 .cart-summary {
-  background: white;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--bg-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   height: fit-content;
   position: sticky;
-  top: 20px;
+  top: var(--spacing-xl);
+  border: 1px solid var(--border-color);
 }
 
 .cart-summary h2 {
-  margin: 0 0 20px 0;
-  color: #2c3e50;
+  margin: 0 0 var(--spacing-lg) 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .summary-row {
@@ -154,19 +167,22 @@
 .checkout-button {
   display: block;
   width: 100%;
-  padding: 15px;
-  background-color: #61dafb;
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   color: white;
   text-decoration: none;
   text-align: center;
-  border-radius: 4px;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: background-color 0.3s;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  margin-top: var(--spacing-lg);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
 }
 
 .checkout-button:hover {
-  background-color: #4fa8c5;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .continue-shopping {
