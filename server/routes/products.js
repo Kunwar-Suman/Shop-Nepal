@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const { authenticateToken, isAdmin } = require('../middleware/auth');
+const upload = require('../config/upload');
 
 // Get all products with filters
 router.get('/', (req, res) => {
@@ -74,9 +75,10 @@ router.get('/:id', (req, res) => {
   });
 });
 
-// Create product (Admin only)
-router.post('/', authenticateToken, isAdmin, (req, res) => {
-  const { category_id, product_name, price, stock_quantity, description, image, status } = req.body;
+// Create product (Admin only) - with image upload
+router.post('/', authenticateToken, isAdmin, upload.single('image'), (req, res) => {
+  const { category_id, product_name, price, stock_quantity, description, status } = req.body;
+  const imagePath = req.file ? `/uploads/products/${req.file.filename}` : null;
 
   if (!product_name || !price) {
     return res.status(400).json({ error: 'Product name and price are required' });
@@ -93,7 +95,7 @@ router.post('/', authenticateToken, isAdmin, (req, res) => {
     price,
     stock_quantity || 0,
     description || null,
-    image || null,
+    imagePath,
     status || 'active'
   ];
 
@@ -103,15 +105,23 @@ router.post('/', authenticateToken, isAdmin, (req, res) => {
     }
     res.status(201).json({
       message: 'Product created successfully',
-      product_id: result.insertId
+      product_id: result.insertId,
+      image: imagePath
     });
   });
 });
 
-// Update product (Admin only)
-router.put('/:id', authenticateToken, isAdmin, (req, res) => {
+// Update product (Admin only) - with optional image upload
+router.put('/:id', authenticateToken, isAdmin, upload.single('image'), (req, res) => {
   const { id } = req.params;
-  const { category_id, product_name, price, stock_quantity, description, image, status } = req.body;
+  const { category_id, product_name, price, stock_quantity, description, status } = req.body;
+  
+  // If new image uploaded, use it; otherwise keep existing or use provided URL
+  let imagePath = req.body.image; // Default to provided image URL
+  
+  if (req.file) {
+    imagePath = `/uploads/products/${req.file.filename}`;
+  }
 
   const query = `
     UPDATE products 
@@ -126,7 +136,7 @@ router.put('/:id', authenticateToken, isAdmin, (req, res) => {
     price,
     stock_quantity,
     description || null,
-    image || null,
+    imagePath,
     status || 'active',
     id
   ];
@@ -138,7 +148,7 @@ router.put('/:id', authenticateToken, isAdmin, (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Product not found' });
     }
-    res.json({ message: 'Product updated successfully' });
+    res.json({ message: 'Product updated successfully', image: imagePath });
   });
 });
 

@@ -149,7 +149,34 @@ router.get('/my-orders', authenticateToken, (req, res) => {
   });
 });
 
-// Get single order
+// Get all orders (Admin only) - Must come before /:id route
+router.get('/', authenticateToken, isAdmin, (req, res) => {
+  const { status } = req.query;
+  
+  let query = `
+    SELECT o.*, u.name as customer_name, u.phone as customer_phone
+    FROM orders o
+    JOIN users u ON o.user_id = u.user_id
+    WHERE 1=1
+  `;
+  const params = [];
+
+  if (status) {
+    query += ' AND o.order_status = ?';
+    params.push(status);
+  }
+
+  query += ' ORDER BY o.created_at DESC';
+
+  db.query(query, params, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to fetch orders' });
+    }
+    res.json(results);
+  });
+});
+
+// Get single order - Must come after /my-orders and / routes
 router.get('/:id', authenticateToken, (req, res) => {
   const userId = req.user.userId;
   const { id } = req.params;
@@ -200,33 +227,6 @@ router.get('/:id', authenticateToken, (req, res) => {
     };
     
     res.json(order);
-  });
-});
-
-// Get all orders (Admin only)
-router.get('/', authenticateToken, isAdmin, (req, res) => {
-  const { status } = req.query;
-  
-  let query = `
-    SELECT o.*, u.name as customer_name, u.phone as customer_phone
-    FROM orders o
-    JOIN users u ON o.user_id = u.user_id
-    WHERE 1=1
-  `;
-  const params = [];
-
-  if (status) {
-    query += ' AND o.order_status = ?';
-    params.push(status);
-  }
-
-  query += ' ORDER BY o.created_at DESC';
-
-  db.query(query, params, (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to fetch orders' });
-    }
-    res.json(results);
   });
 });
 
