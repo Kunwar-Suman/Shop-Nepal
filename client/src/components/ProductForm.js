@@ -185,7 +185,7 @@ const ProductForm = ({ product, onClose, onSuccess }) => {
             />
             {imagePreview && (
               <div className="image-preview">
-                <img src={imagePreview.startsWith('data:') ? imagePreview : `http://localhost:5000${imagePreview}`} alt="Preview" />
+                <img src={imagePreview.startsWith('data:') || imagePreview.startsWith('http') ? imagePreview : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${imagePreview}`} alt="Preview" />
               </div>
             )}
           </div>

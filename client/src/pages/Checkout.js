@@ -27,6 +27,7 @@ const Checkout = () => {
       ...prev,
       phone: user.phone || ''
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchCart = async () => {

@@ -10,6 +10,7 @@ const OrderDetail = () => {
 
   useEffect(() => {
     fetchOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchOrder = async () => {
@@ -73,7 +74,14 @@ const OrderDetail = () => {
               <div key={index} className="order-item-row">
                 <div className="item-info">
                   {item.image && (
-                    <img src={item.image} alt={item.product_name} className="item-thumbnail" />
+                    <img 
+                      src={item.image.startsWith('http') ? item.image : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${item.image}`} 
+                      alt={item.product_name} 
+                      className="item-thumbnail"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                      }}
+                    />
                   )}
                   <div>
                     <h4>{item.product_name}</h4>

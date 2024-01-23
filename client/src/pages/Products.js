@@ -17,6 +17,7 @@ const Products = () => {
   useEffect(() => {
     fetchCategories();
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const fetchCategories = async () => {
@@ -107,10 +108,18 @@ const Products = () => {
             <div key={product.product_id} className="product-card">
               <div className="product-image">
                 {product.image ? (
-                  <img src={product.image} alt={product.product_name} />
-                ) : (
-                  <div className="placeholder-image">No Image</div>
-                )}
+                  <img 
+                    src={product.image.startsWith('http') ? product.image : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${product.image}`} 
+                    alt={product.product_name}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                ) : null}
+                <div className="placeholder-image" style={{ display: product.image ? 'none' : 'flex' }}>
+                  No Image
+                </div>
               </div>
               <div className="product-info">
                 <h3>{product.product_name}</h3>
@@ -126,7 +135,7 @@ const Products = () => {
             </div>
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

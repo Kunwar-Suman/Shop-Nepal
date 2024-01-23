@@ -26,6 +26,7 @@ const AdminDashboard = () => {
       return;
     }
     fetchDashboardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, activeTab]);
 
   const fetchDashboardData = async () => {
@@ -230,7 +231,7 @@ const AdminDashboard = () => {
                   <div key={product.product_id} className="product-admin-card">
                     {product.image && (
                       <img
-                        src={product.image.startsWith('http') ? product.image : `http://localhost:5000${product.image}`}
+                        src={product.image.startsWith('http') ? product.image : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${product.image}`}
                         alt={product.product_name}
                         className="product-admin-image"
                       />

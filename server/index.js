@@ -47,7 +47,20 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📡 API available at http://localhost:${PORT}/api`);
+});
+
+// Handle server errors
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`❌ Port ${PORT} is already in use. Please:`);
+    console.error(`   1. Stop the process using port ${PORT}`);
+    console.error(`   2. Or change PORT in server/.env file`);
+    console.error(`   3. Find process: netstat -ano | findstr :${PORT}`);
+  } else {
+    console.error('❌ Server error:', err);
+  }
+  process.exit(1);
 });

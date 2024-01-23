@@ -5,12 +5,12 @@ import api from '../config/api';
 import './Orders.css';
 
 const Orders = () => {
-  const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchOrders = async () => {
