@@ -106,27 +106,136 @@
   background-color: #4fa8c5;
 }
 
-.products-list {
+.admin-header-actions {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-add {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-add:hover {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.products-list,
+.categories-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
 }
 
-.product-admin-card {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #eee;
+.product-admin-card,
+.category-admin-card {
+  background: var(--bg-primary);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
 }
 
-.product-admin-card h3 {
-  margin: 0 0 10px 0;
-  color: #2c3e50;
+.product-admin-card:hover,
+.category-admin-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
 }
 
-.product-admin-card p {
-  margin: 8px 0;
-  color: #666;
+.product-admin-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.product-admin-info {
+  flex: 1;
+}
+
+.product-admin-card h3,
+.category-admin-card h3 {
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.product-admin-card p,
+.category-admin-card p {
+  margin: var(--spacing-xs) 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.product-admin-actions,
+.category-admin-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-edit,
+.btn-delete {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 0.9rem;
+}
+
+.btn-edit {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-edit:hover {
+  background: var(--primary-dark);
+}
+
+.btn-delete {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
 }
 
 .loading,
