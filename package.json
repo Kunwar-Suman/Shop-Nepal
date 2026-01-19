@@ -5,9 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && nodemon index.js",
-    "client": "cd client && npm start",
-    "install-all": "npm install && cd server && npm install && cd ../client && npm install"
+    "server": "npm run dev --prefix server",
+    "client": "npm start --prefix client",
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client"
   },
   "keywords": ["ecommerce", "nepal", "shop"],
   "author": "",
