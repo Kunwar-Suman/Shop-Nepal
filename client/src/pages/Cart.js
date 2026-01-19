@@ -17,6 +17,7 @@ const Cart = () => {
       return;
     }
     fetchCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchCart = async () => {
@@ -29,6 +30,13 @@ const Cart = () => {
       setLoading(false);
     }
   };
+
+  // Refresh cart count in navbar after cart operations
+  useEffect(() => {
+    if (user) {
+      window.dispatchEvent(new Event('cartUpdated'));
+    }
+  }, [cartItems, user]);
 
   const updateQuantity = async (cartId, newQuantity) => {
     if (newQuantity < 1) return;
@@ -85,10 +93,18 @@ const Cart = () => {
             <div key={item.cart_id} className="cart-item">
               <div className="item-image">
                 {item.image ? (
-                  <img src={item.image} alt={item.product_name} />
-                ) : (
-                  <div className="placeholder">No Image</div>
-                )}
+                  <img 
+                    src={item.image.startsWith('http') ? item.image : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${item.image}`} 
+                    alt={item.product_name}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                ) : null}
+                <div className="placeholder" style={{ display: item.image ? 'none' : 'flex' }}>
+                  No Image
+                </div>
               </div>
               
               <div className="item-details">

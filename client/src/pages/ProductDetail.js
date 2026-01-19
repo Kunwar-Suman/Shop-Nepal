@@ -15,6 +15,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     fetchProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchProduct = async () => {
@@ -59,10 +60,18 @@ const ProductDetail = () => {
       <div className="product-detail">
         <div className="product-image-section">
           {product.image ? (
-            <img src={product.image} alt={product.product_name} />
-          ) : (
-            <div className="placeholder-image-large">No Image Available</div>
-          )}
+            <img 
+              src={product.image.startsWith('http') ? product.image : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${product.image}`} 
+              alt={product.product_name}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+          ) : null}
+          <div className="placeholder-image-large" style={{ display: product.image ? 'none' : 'flex' }}>
+            No Image Available
+          </div>
         </div>
         
         <div className="product-details-section">

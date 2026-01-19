@@ -10,19 +10,22 @@ An e-commerce platform designed for local Nepali shop owners to sell products on
 - ✅ User registration and authentication (Email/Phone)
 - ✅ Browse products with search and filter
 - ✅ Product categories
-- ✅ Shopping cart management
+- ✅ Shopping cart management with item count badge
 - ✅ Order placement with delivery address
 - ✅ Order history and tracking
 - ✅ Payment methods: Cash on Delivery (COD), eSewa/Khalti (optional)
+- ✅ Protected routes for authenticated users
+- ✅ Image upload and display
 
 ### Admin Features
 - ✅ Secure admin login
-- ✅ Product management (Add, Update, Delete)
-- ✅ Category management
+- ✅ Product management (Add, Update, Delete with image upload)
+- ✅ Category management (Add, Edit, Delete)
 - ✅ Order management with status updates
 - ✅ Sales reports and analytics
 - ✅ Daily/Monthly sales tracking
 - ✅ Top selling products
+- ✅ Admin dashboard with tabs
 
 ## Tech Stack
 
